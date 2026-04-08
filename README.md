@@ -13,8 +13,7 @@ Sempre que houver alguma instabilidade detectada, ele envia uma notificação vi
 - Verifica o status a cada 1 minuto (`60 segundos`).
 - Caso detecte problemas nos serviços:
   - Envia um alerta para o Google Chat.
-  - Aguarda `30 minutos` antes de tentar checar novamente (para evitar spam de alertas).
-- Trata erros de conexão automaticamente, mantendo o script rodando.
+
 
 ---
 
@@ -24,9 +23,7 @@ Sempre que houver alguma instabilidade detectada, ele envia uma notificação vi
   - `requests`
   - `beautifulsoup4`
   - `dotenv` (opcional para variáveis de ambiente)
-  - `json`
-  - `time`
-  - `sys`, `io`, `os`
+
 
 ---
 
@@ -34,7 +31,7 @@ Sempre que houver alguma instabilidade detectada, ele envia uma notificação vi
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/seu-usuario/Monitoria-status-iFood-VTEX.git
    ```
 
 2. **Instale as dependências**:
@@ -56,7 +53,7 @@ Sempre que houver alguma instabilidade detectada, ele envia uma notificação vi
 
 ## 🔥 Observações
 - **Timeout** de 15 segundos foi configurado nas requisições para evitar travamentos.
-- O script está preparado para **erros de rede** sem interromper a execução.
+
 
 
 ---
