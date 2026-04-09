@@ -32,12 +32,6 @@ def enviar_mensagem(site, frase, url):
 
 
 
-
-
-
-
-
-
 def verificar_IFOOD():
     global status_atual_ifood, status_normal_ifood
 
@@ -66,29 +60,30 @@ def verificar_IFOOD():
 
 
 
-
-
-
-
 def verificar_VTEX():
-    global status_atual_vtex
+    global status_atual_vtex, status_normal_vtex
+
     pegina_vtex = requests.get(url_vtex, timeout=15)
     dados_pagina_vtex = BeautifulSoup(pegina_vtex.text, 'html.parser')
     site = dados_pagina_vtex.find('title').text
     frase = dados_pagina_vtex.find('li').text
 
-    if status_atual_vtex != frase:
-        enviar_mensagem(site, frase, url_vtex)
-        status_atual_vtex = frase
+    # Status atual ESTAVA ruim (diferente do normal)
+    status_estava_ruim = status_atual_vtex != status_normal_vtex
+    
+    # Status AGORA está normal
+    status_agora_normal = frase == status_normal_vtex
 
-
-
-
-
-
-
-
-
+    # Se estava ruim E agora está normal → voltou ao normal
+    if status_estava_ruim and status_agora_normal:
+        enviar_mensagem(site, "O status voltou ao normal!", url_vtex)
+    
+    # Se está diferente do normal E era diferente também → está ainda ruim
+    elif frase != status_normal_vtex and status_atual_vtex != frase:
+        enviar_mensagem(site, frase, url_ifood)
+    
+    # Atualiza o status
+    status_atual_vtex = frase
 
 
 while True:
