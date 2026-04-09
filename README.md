@@ -44,7 +44,7 @@ Sempre que houver alguma instabilidade detectada, ele envia uma notificação vi
 
 4. **Execute o script**:
    ```bash
-   python "Monitoramento vtex e ifood.py"
+   python main.py
    ```
 
 
