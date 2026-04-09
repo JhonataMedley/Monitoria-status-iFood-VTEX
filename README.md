@@ -54,7 +54,7 @@ Sempre que houver alguma instabilidade detectada, ele envia uma notificação vi
 ## 🔥 Observações
 - **Timeout** de 15 segundos foi configurado nas requisições para evitar travamentos.
 
-
+- O script está preparado para **erros de rede** sem interromper a execução.
 
 ---
 
