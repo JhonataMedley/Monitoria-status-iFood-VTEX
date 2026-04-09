@@ -33,57 +33,62 @@ def enviar_mensagem(site, frase, url):
 
 
 def verificar_IFOOD():
-    global status_atual_ifood, status_normal_ifood
+    try:
+        global status_atual_ifood, status_normal_ifood
 
-    pegina_ifood = requests.get(url_ifood, timeout=15)
-    dados_pagina_ifood = BeautifulSoup(pegina_ifood.text, 'html.parser')
-    site = dados_pagina_ifood.find('title').text
-    frase = dados_pagina_ifood.find('h2', class_='status font-large').text.strip()
+        pegina_ifood = requests.get(url_ifood, timeout=15)
+        dados_pagina_ifood = BeautifulSoup(pegina_ifood.text, 'html.parser')
+        site = dados_pagina_ifood.find('title').text
+        frase = dados_pagina_ifood.find('h2', class_='status font-large').text.strip()
 
-    # Status atual ESTAVA ruim (diferente do normal)
-    status_estava_ruim = status_atual_ifood != status_normal_ifood
-    
-    # Status AGORA está normal
-    status_agora_normal = frase == status_normal_ifood
+        # Status atual ESTAVA ruim (diferente do normal)
+        status_estava_ruim = status_atual_ifood != status_normal_ifood
+        
+        # Status AGORA está normal
+        status_agora_normal = frase == status_normal_ifood
 
-    # Se estava ruim E agora está normal → voltou ao normal
-    if status_estava_ruim and status_agora_normal:
-        enviar_mensagem(site, "O status voltou ao normal!", url_ifood)
-    
-    # Se está diferente do normal E era diferente também → está ainda ruim
-    elif frase != status_normal_ifood and status_atual_ifood != frase:
-        enviar_mensagem(site, frase, url_ifood)
-    
-    # Atualiza o status
-    status_atual_ifood = frase
-
-
+        # Se estava ruim E agora está normal → voltou ao normal
+        if status_estava_ruim and status_agora_normal:
+            enviar_mensagem(site, "O status voltou ao normal!", url_ifood)
+        
+        # Se está diferente do normal E era diferente também → está ainda ruim
+        elif frase != status_normal_ifood and status_atual_ifood != frase:
+            enviar_mensagem(site, frase, url_ifood)
+        
+        # Atualiza o status
+        status_atual_ifood = frase
+    except requests.exceptions.RequestException as erro:
+        print(f"Erro ao verificar iFood: {erro}")
 
 
 def verificar_VTEX():
-    global status_atual_vtex, status_normal_vtex
+    try:
+        global status_atual_vtex, status_normal_vtex
 
-    pegina_vtex = requests.get(url_vtex, timeout=15)
-    dados_pagina_vtex = BeautifulSoup(pegina_vtex.text, 'html.parser')
-    site = dados_pagina_vtex.find('title').text
-    frase = dados_pagina_vtex.find('li').text
+        pegina_vtex = requests.get(url_vtex, timeout=15)
+        dados_pagina_vtex = BeautifulSoup(pegina_vtex.text, 'html.parser')
+        site = dados_pagina_vtex.find('title').text
+        frase = dados_pagina_vtex.find('li').text
 
-    # Status atual ESTAVA ruim (diferente do normal)
-    status_estava_ruim = status_atual_vtex != status_normal_vtex
-    
-    # Status AGORA está normal
-    status_agora_normal = frase == status_normal_vtex
+        # Status atual ESTAVA ruim (diferente do normal)
+        status_estava_ruim = status_atual_vtex != status_normal_vtex
+        
+        # Status AGORA está normal
+        status_agora_normal = frase == status_normal_vtex
 
-    # Se estava ruim E agora está normal → voltou ao normal
-    if status_estava_ruim and status_agora_normal:
-        enviar_mensagem(site, "O status voltou ao normal!", url_vtex)
-    
-    # Se está diferente do normal E era diferente também → está ainda ruim
-    elif frase != status_normal_vtex and status_atual_vtex != frase:
-        enviar_mensagem(site, frase, url_ifood)
-    
-    # Atualiza o status
-    status_atual_vtex = frase
+        # Se estava ruim E agora está normal → voltou ao normal
+        if status_estava_ruim and status_agora_normal:
+            enviar_mensagem(site, "O status voltou ao normal!", url_vtex)
+        
+        # Se está diferente do normal E era diferente também → está ainda ruim
+        elif frase != status_normal_vtex and status_atual_vtex != frase:
+            enviar_mensagem(site, frase, url_ifood)
+        
+        # Atualiza o status
+        status_atual_vtex = frase
+
+    except requests.exceptions.RequestException as erro:
+        print(f"Erro ao verificar VTEX: {erro}")
 
 
 while True:
