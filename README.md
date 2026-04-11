@@ -14,6 +14,22 @@ Sempre que houver alguma instabilidade detectada, ele envia uma notificação vi
 - Caso detecte problemas nos serviços:
   - Envia um alerta para o Google Chat.
 
+---
+## 📸 Demonstração
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+
+   <div style="flex: 1; min-width: 300px; text-align: center;">
+    <strong>Exemplo do código (função de envio e verificação do iFood):</strong><br><br>
+    <img src="./imagens/code.png" alt="Código Python" style="width: 100%; max-width: 500px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  </div>
+  
+  <div style="flex: 1; min-width: 300px; text-align: center;">
+    <strong>Notificação recebida no Google Chat:</strong><br><br>
+    <img src="./imagens/chat.png" alt="Notificação Google Chat" style="width: 100%; max-width: 500; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  </div>
+</div>
+
 
 ---
 
